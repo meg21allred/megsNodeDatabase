@@ -34,6 +34,7 @@ client.query(text, values, (err, res) => {
     console.log(err.stack)
   } else {
     console.log(res.rows[0])
+    res.send(res.rows[0]);
     // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
   }
 })
