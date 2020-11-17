@@ -1,13 +1,19 @@
 const express = require("express");
 const app = express();
 
-const { Client } = require('pg');
+const { Pool, Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
+});
+
+const pool = new Pool()
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  pool.end()
 });
 
 client.connect();
