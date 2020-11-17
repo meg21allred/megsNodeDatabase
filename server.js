@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const router = express.Router();
+//const router = express.Router();
 
 
 const { Pool } = require('pg');
@@ -9,7 +9,7 @@ const pool = new Pool({
     ssl: true
 });
 
-router.get('db', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         const client = await pool.connect();
         const result = await client.query('SELECT * FROM records');
@@ -22,15 +22,15 @@ router.get('db', async (req, res) => {
     }
 })
 //get home page
-router.get('/', (req, res, next) => {
-    res.render('index', { title: 'Express'});
-});
+// router.get('/', (req, res, next) => {
+//     res.render('index', { title: 'Express'});
+// });
 
 //module.exports = router;
 
 app.listen(process.env.PORT);
 //app.listen(3000);
 
-app.get('/', (req, res) => {
-    res.send("Two thumbs up!");
-})
+// app.get('/', (req, res) => {
+//     res.send("Two thumbs up!");
+// })
