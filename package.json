@@ -1,0 +1,20 @@
+{
+  "name": "megsnodedatabase",
+  "version": "1.0.0",
+  "description": "a simple node heroku database",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meg21allred/megsNodeDatabase.git"
+  },
+  "author": "Megan Allred",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meg21allred/megsNodeDatabase/issues"
+  },
+  "homepage": "https://github.com/meg21allred/megsNodeDatabase#readme"
+}
