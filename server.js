@@ -6,12 +6,14 @@ const app = express();
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
+app.use(express.static('public'));
 
 const { Pool } = require('pg');
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: true
 });
+
 
 app.listen(process.env.PORT);
 //app.listen(3000);
