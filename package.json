@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/meg21allred/megsNodeDatabase/issues"
   },
-  "homepage": "https://github.com/meg21allred/megsNodeDatabase#readme"
+  "homepage": "https://github.com/meg21allred/megsNodeDatabase#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
