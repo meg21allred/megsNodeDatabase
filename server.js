@@ -1,43 +1,32 @@
 const express = require("express");
 const app = express();
+const router = express.Router();
 
-const { Pool, Client } = require('pg');
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+const { Pool } = require('pg');
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
 });
 
-const pool = new Pool()
-pool.query('SELECT NOW()', (err, res) => {
-  console.log(err, res)
-  pool.end()
-});
-
-client.connect();
-
-client.query('SELECT * FROM records;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
-});
-
-const text = 'INSERT INTO records(first_name, last_name, birth_date) VALUES($1, $2, $3) RETURNING *';
-const values = ['Grady', 'Allred', '10/07/07'];
-// callback
-client.query(text, values, (err, res) => {
-  if (err) {
-    console.log(err.stack)
-  } else {
-    console.log(res.rows[0])
-    res.send(res.rows[0]);
-    // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
-  }
+router.get('db', async (req, res) => {
+    try {
+        const client = await pool.connect();
+        const result = await client.query('SELECT * FROM records');
+        const results = { 'results': (result) ? result.rows : null};
+        res.render('pages/db', results);
+        client.release();
+    } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
 })
+//get home page
+router.get('/', (req, res, next) => {
+    res.render('index', { title: 'Express'});
+});
+
+//module.exports = router;
 
 app.listen(process.env.PORT);
 //app.listen(3000);
