@@ -9,7 +9,14 @@ const pool = new Pool({
     ssl: true
 });
 
-app.get('/', async (req, res) => {
+app.listen(process.env.PORT);
+//app.listen(3000);
+
+app.get('/', (req, res) => {
+    res.send("Two thumbs up!");
+})
+
+app.get('/getPerson', async (req, res) => {
     try {
         const client = await pool.connect();
         const result = await client.query('SELECT * FROM records');
@@ -21,16 +28,8 @@ app.get('/', async (req, res) => {
         res.send("Error " + err);
     }
 })
-//get home page
-// router.get('/', (req, res, next) => {
-//     res.render('index', { title: 'Express'});
-// });
 
-//module.exports = router;
 
-app.listen(process.env.PORT);
-//app.listen(3000);
 
-// app.get('/', (req, res) => {
-//     res.send("Two thumbs up!");
-// })
+
+
