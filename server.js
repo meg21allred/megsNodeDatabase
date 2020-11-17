@@ -1,7 +1,11 @@
 const express = require("express");
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
 const app = express();
-//const router = express.Router();
+
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
 
 const { Pool } = require('pg');
 const pool = new Pool({

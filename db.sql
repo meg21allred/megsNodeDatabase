@@ -5,6 +5,8 @@ CREATE TABLE records (
     birth_date VARCHAR(255)
 )
 
+
+
 INSERT INTO records (first_name, last_name, birth_date) VALUES (
     ('Megan'), ('Allred'), ('10/21/1983')
 )
