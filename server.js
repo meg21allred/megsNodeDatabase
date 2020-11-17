@@ -26,6 +26,17 @@ client.query('SELECT * FROM records;', (err, res) => {
   client.end();
 });
 
+const text = 'INSERT INTO records(first_name, last_name, birth_date) VALUES($1, $2, $3) RETURNING *';
+const values = ['Grady', 'Allred', '10/07/07'];
+// callback
+client.query(text, values, (err, res) => {
+  if (err) {
+    console.log(err.stack)
+  } else {
+    console.log(res.rows[0])
+    // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
+  }
+})
 
 app.listen(process.env.PORT);
 //app.listen(3000);
