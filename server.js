@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     res.send("Two thumbs up!");
 })
 
-app.get('/getPerson/:personId', async (req, res) => {
+app.get('/getPerson', async (req, res) => {
 
     //let formData = req.body;
 
