@@ -22,10 +22,16 @@ app.get('/', (req, res) => {
     res.send("Two thumbs up!");
 })
 
-app.get('/getPerson', async (req, res) => {
+app.get('/getPerson/:personId', async (req, res) => {
+
+    //let formData = req.body;
+
+    //const id = request.params.personId;
+   
+
     try {
         const client = await pool.connect();
-        const result = await client.query('SELECT * FROM records');
+        const result = await client.query('SELECT * FROM records ');
         const results = { 'results': (result) ? result.rows : null};
         res.send(JSON.stringify(results));
         client.release();
@@ -33,6 +39,8 @@ app.get('/getPerson', async (req, res) => {
         console.error(err);
         res.send("Error " + err);
     }
+  
+
 })
 
 
